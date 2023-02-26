@@ -30,7 +30,7 @@ ROLLBACK TRAN
 --4 añade al nombre del usuario con mas tuits un * al final del nombre.
 BEGIN TRAN
     use twitter
-    UPDATE usuarios
+    UPDATE usuarios 
     SET nombre=nombre+'*'
     WHERE nombre = (SELECT top(1) u.nombre FROM usuarios u
                     INNER JOIN tweets t on t.idusuario = u.id
@@ -38,9 +38,44 @@ BEGIN TRAN
                     ORDER BY COUNT(1) DESC)
 ROLLBACK TRAN
 --5 cambia todos los emails de google a gugle
-
+BEGIN TRAN
+    UPDATE usuarios 
+    SET email =REPLACE(email,'google','gugle')
+    WHERE email in (SELECT email FROM usuarios
+                    WHERE email LIKE '%google%')
+ROLLBACK TRAN
 --6 borra a karen ( la del examen). Si da algún error de fks, borra todo lo necesario para poder borrar al usuario de karen
-
+BEGIN TRAN
+    DELETE FROM likes
+    WHERE idusuario in (SELECT id FROM usuarios
+                        WHERE nick = 'karenmuoz6268')
+    DELETE FROM tweets
+    WHERE idusuario in (SELECT id FROM usuarios
+                        WHERE nick = 'karenmuoz6268')
+    DELETE FROM seguidores
+    WHERE idseguido in (SELECT id FROM usuarios
+                        WHERE nick = 'karenmuoz6268')
+    DELETE FROM seguidores
+    WHERE idseguidor in (SELECT id FROM usuarios
+                        WHERE nick = 'karenmuoz6268')
+    DELETE from usuarios
+    WHERE nick = ('karenmuoz6268')
+ROLLBACK TRAN
 --7 todos los telefonos que empiezan por 1- son de USA, arregla la tabla usuario para que todo telefono que empieze por 1- ponga pais USA.
-
+BEGIN TRAN
+    UPDATE usuarios
+    set pais = 'USA' 
+    WHERE telefono LIKE '1-%'
+ROLLBACK TRAN
 --8 modifica todos los tuits que empiecen por a minuscula para que empiecen por A mayuscula.
+BEGIN TRAN
+    UPDATE tweets
+    SET mensaje =REPLACE(mensaje,'a%','A%')
+    WHERE LOWER(SUBSTRING(mensaje, 1, 1)) = LOWER('a')
+ROLLBACK TRAN
+
+
+-- esto se supone que me tiene que sacar solo las letras minusculas pero no pasa
+SELECT SUBSTRING(mensaje, 1, 1) AS lowercase
+FROM tweets
+WHERE LOWER(SUBSTRING(mensaje, 1, 1)) = LOWER('a')

@@ -26,7 +26,7 @@ HAVING COUNT(1) > 1
 
 -- pregunta 5
 use twitter
-SELECT top(19) u.id,COUNT(1) as numeroTweets FROM usuarios u
+SELECT top(1) u.id,COUNT(1) as numeroTweets FROM usuarios u
 INNER JOIN tweets t on t.idusuario = u.id
 GROUP BY u.id
 ORDER BY COUNT(1) DESC
