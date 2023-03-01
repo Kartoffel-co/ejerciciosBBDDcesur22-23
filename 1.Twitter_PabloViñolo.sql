@@ -40,9 +40,9 @@ ROLLBACK TRAN
 --5 cambia todos los emails de google a gugle
 BEGIN TRAN
     UPDATE usuarios 
-    SET email =REPLACE(email,'google','gugle')
+    SET email =REPLACE(email,'@google.','@gugle.')
     WHERE email in (SELECT email FROM usuarios
-                    WHERE email LIKE '%google%')
+                    WHERE email LIKE '%@google.%')
 ROLLBACK TRAN
 --6 borra a karen ( la del examen). Si da algún error de fks, borra todo lo necesario para poder borrar al usuario de karen
 BEGIN TRAN
@@ -70,11 +70,10 @@ ROLLBACK TRAN
 --8 modifica todos los tuits que empiecen por a minuscula para que empiecen por A mayuscula.
 BEGIN TRAN
     UPDATE tweets
-    SET mensaje =REPLACE(mensaje,'a%','A%')
-    WHERE LOWER(SUBSTRING(mensaje, 1, 1)) = LOWER('a')
+    SET mensaje = 'A' + SUBSTRING(mensaje,2,154) FROM tweets WHERE mensaje LIKE 'a%'
 ROLLBACK TRAN
 
-
+SELECT mensaje FROM  tweets WHERE mensaje LIKE 'a%'
 -- esto se supone que me tiene que sacar solo las letras minusculas pero no pasa
 SELECT SUBSTRING(mensaje, 1, 1) AS lowercase
 FROM tweets
