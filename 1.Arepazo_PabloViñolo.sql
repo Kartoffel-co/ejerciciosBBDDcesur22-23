@@ -30,11 +30,19 @@ ROLLBACK TRAN
 SELECT * FROM Pedidos
 SELECT * FROM PedidosLinea
 BEGIN TRAN
+    INSERT into PedidosLinea (IdPedido,IdMenu,Cantidad,PrecioVentaUnitario,IVA)
+    VALUES (41,(select id from Menu WHERE Nombre = 'Patatas brabas'),3,(select PrecioVenta from Menu WHERE Nombre = 'Patatas brabas'))
+
+
 
     INSERT into Pedidos (Fecha_pedido,Total,GastosEnvio,SubTotal,IdCliente,Telefono,Direccion,Cod_Postal,Ciudad)
-    VALUES (GETDATE(),,'4.99',,(select id from Clientes WHERE Nombre = 'Pablo Vinolo'),(select Telefono from Clientes WHERE Nombre = 'Pablo Vinolo'),(select Direccion from Clientes WHERE Nombre = 'Pablo Vinolo'),(select Cod_Postal from Clientes WHERE Nombre = 'Pablo Vinolo'),(select Ciudad from Clientes WHERE Nombre = 'Pablo Vinolo'))
+    VALUES (GETDATE(),,'4.99',,(select id from Clientes WHERE Nombre = 'Pablo Vinolo'),
+                                (select Telefono from Clientes WHERE Nombre = 'Pablo Vinolo'),
+                                (select Direccion from Clientes WHERE Nombre = 'Pablo Vinolo'),
+                                (select Cod_Postal from Clientes WHERE Nombre = 'Pablo Vinolo'),
+                                (select Ciudad from Clientes WHERE Nombre = 'Pablo Vinolo'))
 ROLLBACK TRAN
-
+UPDATE Menu set Nombre = REPLACE(Nombre,'Patatas brabas','Patatas bravas')
 --5 añade y borra un cliente.
 
 --6.- Borra todos los clientes que no tengan pedidos realizados.
