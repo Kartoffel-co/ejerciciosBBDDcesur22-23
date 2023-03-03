@@ -1,5 +1,5 @@
 --1.-Da de alta un cliente en el arepazo
-USE arepezovinolo
+USE arepezo
 SELECT * FROM Clientes
 BEGIN TRAN 
     INSERT into Clientes (nombre,email,telefono,direccion,cod_postal,ciudad,provincia)
