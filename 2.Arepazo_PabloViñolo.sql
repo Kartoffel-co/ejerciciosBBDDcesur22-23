@@ -124,10 +124,8 @@ ROLLBACK TRAN
             --Recalcula el subtotal, y el total de todos los pedidos del 2023.
 BEGIN TRAN
     UPDATE Pedidos
-    set SubTotal = (select (PrecioVentaUnitario+PrecioVentaUnitario*0.05)*(select Cantidad from PedidosLinea WHERE IdPedido in (SELECT Id FROM Pedidos WHERE Fecha_pedido like '%2023%'))
-                    FROM PedidosLinea
-                    WHERE IdPedido
-                    in (SELECT Id FROM Pedidos WHERE Fecha_pedido like '%2023%'))
+    set SubTotal =SubTotal + SubTotal*0.05
+ WHERE Fecha_pedido like '%2020%'
 ROLLBACK TRAN
 
 BEGIN TRAN
@@ -138,7 +136,7 @@ WHILE @cnt < (select COUNT(1) as num_cnt from PedidosLinea WHERE IdPedido in (SE
         set SubTotal = (select TOP(@cnt) (PrecioVentaUnitario+PrecioVentaUnitario*0.05)*(select TOP(@cnt) Cantidad from PedidosLinea WHERE IdPedido in (SELECT Id FROM Pedidos WHERE Fecha_pedido like '%2023%'))
         FROM PedidosLinea
         WHERE IdPedido
-        in (SELECT Id FROM Pedidos WHERE Fecha_pedido like '%2023%'))
+        in (SELECT Id FROM Pedidos WHERE Fecha_pedido like '%2020%'))
         SET @cnt = @cnt + 1;
     END;
 ROLLBACK TRAN
