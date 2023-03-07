@@ -3,9 +3,9 @@ USE arepezo
 SELECT * FROM Clientes
 BEGIN TRAN 
     INSERT into Clientes (nombre,email,telefono,direccion,cod_postal,ciudad,provincia)
-    VALUES ('Pablo Vinolo','pablo.s322938@cesurformacion.com','666666666','calle falsa 123','41020','Sevilla','Sevilla')
+    VALUES ('Pablo Vinolo','pablo.unoasir.com','666666666','calle falsa 123','1111','Sevilla','Sevilla')
     INSERT into Clientes (nombre,email,telefono,direccion,cod_postal,ciudad,provincia)
-    VALUES ('Prueba','prueba@unoasir.com','666666666','calle falsa 123','41020','Sevilla','Sevilla')
+    VALUES ('Prueba','prueba@unoasir.com','666666666','calle falsa 123','1111','Sevilla','Sevilla')
 ROLLBACK TRAN
 
 --2.-Da de alta un nuevo plato en el arepa<o. Patatas bravas que cueste 3e.
@@ -31,7 +31,7 @@ SELECT * FROM Pedidos
 SELECT * FROM PedidosLinea
 BEGIN TRAN
     INSERT into PedidosLinea (IdPedido,IdMenu,Cantidad,PrecioVentaUnitario,IVA)
-    VALUES (
+    VALUES (44
             (select top(1) id from Pedidos ORDER by Fecha_pedido desc),
             (select id from Menu WHERE Nombre = 'Patatas bravas'),
             '3',
@@ -61,11 +61,15 @@ BEGIN TRAN
             (select Ciudad from Clientes WHERE Nombre = 'Pablo Vinolo')
             )
 ROLLBACK TRAN
+
+
+
+
 --5 añade y borra un cliente.
 SELECT * FROM Clientes
 BEGIN TRAN
     INSERT into Clientes (nombre,email,telefono,direccion,cod_postal,ciudad,provincia)
-    VALUES ('Prueba2','prueba2@unoasir.com','666666666','calle falsa 123','41020','Sevilla','Sevilla')
+    VALUES ('Prueba2','prueba2@unoasir.com','666666666','calle falsa 123','1111','Sevilla','Sevilla')
 ROLLBACK TRAN
 BEGIN TRAN
     DELETE from Clientes
@@ -85,10 +89,12 @@ SELECT c.Id FROM Clientes c
 left JOIN Pedidos p on p.IdCliente = c.Id
 WHERE IdCliente is NULL   
 --7.- Borra los ingredientes que no se usan en ninguna receta.
-SELECT * FROM Ingredientes i
+BEGIN TRAN
+DELETE from Ingredientes WHERE Id in
+(SELECT i.Id FROM Ingredientes i
 LEFT JOIN Receta r on r.idIngredientes = i.Id
-WHERE idIngredientes is NULL
-
+WHERE idIngredientes is NULL)
+ROLLBACK TRAN
 --8.- Cambia la dirección del cliente 2, la nueva dirección es Calle Falsa 44
 BEGIN TRAN
 UPDATE Clientes SET Email = 'email@hotmail.com'
