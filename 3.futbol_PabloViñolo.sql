@@ -38,8 +38,8 @@ ROLLBACK TRAN
 --4.- sumalo a laliga española.
 SELECT * FROM Competiciones
 BEGIN TRAN
-UPDATE 
-INSERT into 
+UPDATE equipos
+set idCompeticion = (SELECT idCompeticion FROM Competiciones WHERE nombre = 'laliga')
 ROLLBACK TRAN
 --5.-Añade 5 partidos contra los equipos que tu quieras, jugados en 2022, Inventate los resultados.
 
