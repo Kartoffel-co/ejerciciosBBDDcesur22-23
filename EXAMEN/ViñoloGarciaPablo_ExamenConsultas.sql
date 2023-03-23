@@ -3,7 +3,6 @@
 use twitter
 SELECT nick,email FROM usuarios
 ORDER BY nick,email ASC
-
 -- pregunta 2
 use twitter
 SELECT COUNT(1) as numeroSeguidores, nombre FROM usuarios u
