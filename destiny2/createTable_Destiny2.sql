@@ -2,34 +2,38 @@ use Destiny2
 
 create table jugadorDatos( 
 idJugador int PRIMARY KEY not null,
-usuario varchar(50),
-email varchar(50),
-contrasena varchar(50),
-clanID varchar(50)
+usuario varchar(50) not NULL,
+email varchar(50) not NULL,
+contrasena varchar(50) not NULL,
+clanID int not NULL
 )
-INSERT INTO jugadorDatos (idJugador,usuario,email,contrasena,clanID)
-VALUES ()
-	, ()
+9.0
+5
+1       SQLINT        0       3		","      1     idJugador      ""
+2       SQLCHAR       0       50	","      2     usuario      SQL_Latin1_General_CP1_CI_AS
+3       SQLCHAR       0       50	","      3     email       SQL_Latin1_General_CP1_CI_AS
+4       SQLCHAR       0       50	","      4     contrasena       SQL_Latin1_General_CP1_CI_AS
+5       SQLINT        0       1		"\r\n"   5     Year
 
 create table personajes( 
 idPersonajes int PRIMARY KEY not null,
-idJugador int,
-raza varchar(50),
-genero varchar(50),
-clase varchar(50),
-poder varchar(50),
-luz varchar(50),
+idJugador int not null,
+raza varchar(50) not NULL,
+genero varchar(50) not NULL,
+clase varchar(50) not NULL,
+poder varchar(50) not NULL,
+luz varchar(50) not NULL,
 CONSTRAINT fkidJugador FOREIGN KEY (idJugador) REFERENCES jugadorDatos(idJugador)
 )
 
 create table armaduras( 
 nombreArmadura VARCHAR(50) PRIMARY KEY not null,
-tipoArmadura varchar(50),
-estadisticas varchar(50),
-rareza varchar(50),
-elementos varchar(50),
-nivel varchar(50),
-localizacion varchar(50)
+tipoArmadura varchar(50) not NULL,
+estadisticas varchar(50) not NULL,
+rareza varchar(50) not NULL,
+elementos varchar(50) not NULL,
+nivel int not NULL,
+localizacion varchar(50) not NULL
 )
 
 create table inventario( 
