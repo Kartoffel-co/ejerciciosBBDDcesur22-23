@@ -648,26 +648,26 @@ END;
 
 -- insertar armaduras aleatorias en los huecos
 
-DECLARE @contador INT = 1
-WHILE @contador <= 600
+DECLARE @contador1 INT = 1
+WHILE @contador1 <= 600
 BEGIN
     UPDATE TOP(1) inventario
     SET casco = (SELECT TOP(1) nombreArmadura FROM armaduras WHERE tipoArmadura = 'casco' ORDER BY NEWID())
-    WHERE idPersonajes = @contador
+    WHERE idPersonajes = @contador1
 
     UPDATE TOP(1) inventario
     SET guantes = (SELECT TOP(1) nombreArmadura FROM armaduras WHERE tipoArmadura = 'guantes' ORDER BY NEWID())
-    WHERE idPersonajes = @contador
+    WHERE idPersonajes = @contador1
 
     UPDATE TOP(1) inventario
     SET pecho = (SELECT TOP(1) nombreArmadura FROM armaduras WHERE tipoArmadura = 'pecho' ORDER BY NEWID())
-    WHERE idPersonajes = @contador
+    WHERE idPersonajes = @contador1
 
     UPDATE TOP(1) inventario
     SET botas = (SELECT TOP(1) nombreArmadura FROM armaduras WHERE tipoArmadura = 'botas' ORDER BY NEWID())
-    WHERE idPersonajes = @contador
+    WHERE idPersonajes = @contador1
 
-    SET @contador = @contador + 1
+    SET @contador1 = @contador1 + 1
 END
 
 SELECT * FROM personajes
