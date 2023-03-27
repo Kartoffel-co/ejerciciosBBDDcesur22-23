@@ -7,13 +7,6 @@ email varchar(50) not NULL,
 contrasena varchar(50) not NULL,
 clanID int not NULL
 )
-9.0
-5
-1       SQLINT        0       3		","      1     idJugador      ""
-2       SQLCHAR       0       50	","      2     usuario      SQL_Latin1_General_CP1_CI_AS
-3       SQLCHAR       0       50	","      3     email       SQL_Latin1_General_CP1_CI_AS
-4       SQLCHAR       0       50	","      4     contrasena       SQL_Latin1_General_CP1_CI_AS
-5       SQLINT        0       1		"\r\n"   5     Year
 
 create table personajes( 
 idPersonajes int PRIMARY KEY not null,
