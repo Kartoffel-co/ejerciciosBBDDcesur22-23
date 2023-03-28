@@ -47,6 +47,11 @@ BEGIN TRAN
 ROLLBACK TRAN
 
 -- ejercicio 6
+BEGIN TRAN
+    UPDATE Clientes
+    set ciudad = 'B' + SUBSTRING(ciudad,2,200)
+    WHERE ciudad LIKE 'b%'
+ROLLBACK TRAN
 
 -- ejercicio 7
 

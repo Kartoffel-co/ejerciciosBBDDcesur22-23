@@ -15,7 +15,7 @@ raza varchar(50) not NULL,
 genero varchar(50) not NULL,
 clase varchar(50) not NULL,
 poder varchar(50) not NULL,
-luz varchar(50) not NULL,
+luz int not NULL,
 CONSTRAINT fkidJugador FOREIGN KEY (idJugador) REFERENCES jugadorDatos(idJugador)
 )
 
