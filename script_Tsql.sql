@@ -73,15 +73,66 @@ WHILE @count <> 1000
         set @count = @count + 1
     END
 --8 ¿es el numero 83 un numero primo? (el % sirve para calcular el resto de una división (ejemplo: select 3%2 ))
-DECLARE @count as int
+DECLARE @count as int = 1
+DECLARE @num as int
+DECLARE @num1 as int
+DECLARE @num2 as int
+DECLARE @num3 as int
+DECLARE @primo as int = 83
 
-WHILE @count 
+
+WHILE @count <= @primo
     BEGIN
-
-    END
+        set @num = @primo % @count
+        -- print @num
+        if @num = 0 and @count = 1
+            BEGIN
+                set @num1 = @num
+            END
+        IF @num = 0 and @count = @primo
+            BEGIN
+                set @num2 = @num
+            END
+        IF @num1 = 0 and @num2 = 0
+            BEGIN
+                PRINT 'es numero primo'
+            END
+        set @count = @count + 1
+    END  
 
 
 --9 La sucesión de Fibonacci se define de la siguiente forma: a1=1, a2=1 y an=an-1+an-2 para n>2, 
 --es decir los dos primeros son 1 y el resto cada uno es la suma de los dos anteriores, 
 --los primeros son: 1, 1, 2, 3, 5, 8, 13, 21, ... 
 --calcular el 100 término de la sucesión.
+DECLARE @an as bigint = 0
+DECLARE @a1 as bigint = 1
+DECLARE @a2 as bigint = 1
+DECLARE @count as int = 1
+WHILE @count < 3
+    BEGIN
+        PRINT @a1
+        --RINT 'a1'
+        --print '-------'
+        --PRINT @count
+        --PRINT 'count'
+        --print '-------'
+        set @count = @count + 1
+        if @count = 3
+            BEGIN
+                set @an = @a1 + @a2
+                set @a2 = @an
+            print @an
+            --PRINT 'an'
+            --PRINT '-------'
+            END
+    END
+
+WHILE @count > 2 and @count <> 100
+    BEGIN
+        set @an = @a1 + @a2
+        PRINT @an
+        set @a1 = @a2
+        set @a2 = @an
+        set @count = @count + 1
+    END
