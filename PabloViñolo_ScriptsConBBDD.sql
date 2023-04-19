@@ -1,8 +1,33 @@
 
---NBA
+use nba
 --1 Con la bbdd de la NBA imprime por consola el numero de partidos que ha jugado Ricky Rubio. Guardalo en una variable y luego imprimelo con el print.
+DECLARE @count as int
 
+set @count = (select count(ep.idjugador) from jugadores j
+INNER JOIN EstadisticasPartidos ep on j.idjugador = ep.idjugador
+WHERE nombre like 'Ricky Rubio')
+
+print @count
 --2 Recupera el numero de partidos de Ricky Rubio y el de Lebron James en dos variables. Imprime por consola el nombre del jugador que más partidos ha disputado.
+DECLARE @partidosRecky as int
+DECLARE @partidosJames as int
+
+set @partidosRecky = (select count(ep.idjugador) from jugadores j
+INNER JOIN EstadisticasPartidos ep on j.idjugador = ep.idjugador
+WHERE nombre like 'Ricky Rubio')
+
+set @partidosJames = (select count(ep.idjugador) from jugadores j
+INNER JOIN EstadisticasPartidos ep on j.idjugador = ep.idjugador
+WHERE nombre like 'Lebron James')
+
+IF @partidosRecky > @partidosJames
+    BEGIN
+        PRINT 'Ricky Rubio'
+    END
+ELSE
+    BEGIN
+        PRINT 'Lebrom James'
+    END
 
 --3 Recupera en una variable la fecha del ultimo partido de la nba que tenemos en la bbdd. Muestra esa fecha por consola.
 
