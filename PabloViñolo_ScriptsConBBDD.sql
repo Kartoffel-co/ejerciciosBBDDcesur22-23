@@ -30,9 +30,16 @@ ELSE
     END
 
 --3 Recupera en una variable la fecha del ultimo partido de la nba que tenemos en la bbdd. Muestra esa fecha por consola.
+DECLARE @fecha as date
+
+set @fecha = (SELECT top(1) fecha FROM Partidos
+ORDER BY fecha Desc)
+
+PRINT @fecha
 
 --4 Recupera el nombre, la altura y el peso de de Pau Gasol. Imprime un mensaje que ponga "Pau Gasol mide XX y pesa XX. Su indice de masa corporal es: " ( busca como calcular el IMC en google.)
 -- Para poder convertir un decimal o un entero a varchar, podemos usar CAST(@altura as varchar(100)) o directamente declarar la variable altura como un varchar(100).
+
 
 use arepazo
 
