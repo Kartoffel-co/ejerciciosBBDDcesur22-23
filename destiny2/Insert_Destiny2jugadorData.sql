@@ -129,7 +129,7 @@ INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (127,
 INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (128,'Suki Montoya','sukimontoya9682@google.net','TZE61QHI7WG',3);
 INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (129,'Wayne Avila','wayneavila1501@icloud.couk','OKF04CKX1VB',4);
 INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (130,'Ryder Ramirez','ryderramirez2959@outlook.edu','SHR67IDQ5HX',3);
-INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (131,'Jolie Waller','joliewaller9269@protonmail.edu','GII55TOB7GC',3);
+INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (131,'Jolie Waller','joliewaller9269@protonmail.edu','GII55TOB7GC',3);gjgy
 INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (132,'Halee Johnston','haleejohnston2576@google.org','DUC75IYV0OW',1);
 INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (133,'Fletcher Gutierrez','fletchergutierrez8680@google.couk','DQO98SRV8AS',3);
 INSERT INTO jugadorDatos(idJugador,usuario,email,contrasena,clanID) VALUES (134,'Martin Sosa','martinsosa910@hotmail.couk','HKF58MNZ3IK',2);
