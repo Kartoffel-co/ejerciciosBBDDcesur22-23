@@ -99,10 +99,32 @@ GO
 EXEC fibonacci 10
 --https://stackoverflow.com/questions/21746100/how-to-generate-fibonacci-series
 
---4-Con adventureWorks, dame la lista de empleados de un departamento indicando el id del departamento.​
+--4-Con adventureWorks, dame la lista de empleados de un departamento indicando el id del departamento.
+use Adventureworks2017
+GO
+CREATE or ALTER PROCEDURE departamento @id int
+AS
+    BEGIN
+        SELECT pp.BusinessEntityID,FirstName,LastName FROM Person.Person pp
+        INNER JOIN HumanResources.EmployeeDepartmentHistory hr on pp.BusinessEntityID = hr.BusinessEntityID
+        WHERE DepartmentID = @id
+    END
+GO
 
+EXEC departamento 1
 --5-A la consulta anterior, añadir un parametro opcional que sea el sexo de los empleados​
+use Adventureworks2017
+GO
+CREATE or ALTER PROCEDURE departamento @id int @gender VARCHAR
+AS
+    BEGIN
+        SELECT * FROM Person.Person pp
+        INNER JOIN HumanResources.EmployeeDepartmentHistory hr on pp.BusinessEntityID = hr.BusinessEntityID
+        WHERE DepartmentID = @id
+    END
+GO
 
+EXEC departamento 1
 --6 añade al procedimiento anterior un parametro de salida que nos devuelva el numero de empleados.
 
 
