@@ -1,6 +1,8 @@
 
---NBA
+use nba
+
 --1 Con la bbdd de la NBA imprime por consola el numero de partidos que ha jugado Ricky Rubio. Guardalo en una variable y luego imprimelo con el print.
+
 
 --2 Recupera el numero de partidos de Ricky Rubio y el de Lebron James en dos variables. Imprime por consola el nombre del jugador que más partidos ha disputado.
 
