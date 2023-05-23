@@ -3,7 +3,7 @@
 -----SIN NINGUNA BBDD-----------------
 
 --1 Calcula el factorial de 10 con un algoritmo que en lugar de decrementar la variable como hacemos en el ejemplo del PDF, la incremente.
-DECLARE @resultado as int = 1
+DECLARE @resultado as int = 10
 DECLARE @num as int
 set @num=1
 
