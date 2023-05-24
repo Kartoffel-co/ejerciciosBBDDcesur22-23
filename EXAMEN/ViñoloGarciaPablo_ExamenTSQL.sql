@@ -1,54 +1,56 @@
 use laliga_examen
 -- ejercicio 1
 GO
-CREATE or ALTER PROCEDURE presupuestoAnual @equipo VARCHAR(200)
+CREATE or ALTER PROCEDURE presupuestoAnual @id int
 AS
     BEGIN
         UPDATE Equipos 
         SET PresupuestoAnual=(
             SELECT SUM(SueldoAnual) FROM Jugadores j
             INNER JOIN Equipos e on e.id = j.idEquipo
-            WHERE e.nombre = @equipo
+            WHERE e.id = @id
         ) 
-        WHERE nombre = @equipo
+        WHERE id = @id
     END
 
-    EXEC presupuestoAnual 'Sevilla';
+    EXEC presupuestoAnual '1';
+
+SELECT * FROM Equipos
 
 
 
 -- ejercicio 2
 go
-CREATE or ALTER FUNCTION dbo.numeroGoles(@equipo VARCHAR(200))
+CREATE or ALTER FUNCTION dbo.numeroGoles(@id int)
 RETURNS int
 AS
     BEGIN
         DECLARE @numGoles INT
         DECLARE @idEquipo INT
-
-        set @idEquipo = (select id FROM Equipos WHERE nombre = @equipo)
         
-        SET @numGoles = (SELECT SUM(MarcadorLocal) from partidos WHERE idEquipoLocal = @idEquipo) + (SELECT SUM(MarcadorVisitante) from partidos WHERE idEquipoVisitante = @idEquipo)
+        SET @numGoles = (SELECT SUM(MarcadorLocal) from partidos WHERE idEquipoLocal = @id) + (SELECT SUM(MarcadorVisitante) from partidos WHERE idEquipoVisitante = @id)
 
         RETURN @numGoles
     END
 GO
-SELECT dbo.numeroGoles('Sevilla')
+SELECT dbo.numeroGoles('1')
 
 -- ejercicio 3 
 go
 CREATE or ALTER FUNCTION dbo.ganadorPartido(@partido int)
-RETURNS VARCHAR(200)
+RETURNS int
 AS
     BEGIN
         DECLARE @idganador INT
-        if (select Marcadorlocal from Partidos WHERE id = @partido) > (select MarcadorVisitante from Partidos WHERE id = @partido)
+        DECLARE @marcadorLocal int = (select Marcadorlocal from Partidos WHERE id = @partido)
+        DECLARE @marcadorVisitante int = (select MarcadorVisitante from Partidos WHERE id = @partido)
+        if @marcadorLocal > @marcadorVisitante
             BEGIN
                 set @idganador = (select idEquipoLocal from Partidos WHERE id = @partido)
             END
         ELSE
             BEGIN
-                if (select Marcadorlocal from Partidos WHERE id = @partido) < (select MarcadorVisitante from Partidos WHERE id = @partido)
+                if @marcadorLocal < @marcadorVisitante
                     BEGIN
                         set @idganador = (select idEquipoVisitante from Partidos WHERE id = @partido)
                     END
@@ -67,13 +69,7 @@ go
 CREATE or alter PROCEDURE ganadorPartidos
 as 
     BEGIN
-        DECLARE @limite int = (SELECT MAX(id) from Partidos)
-        DECLARE @contador int = (select MIN(id) from Partidos)
-        WHILE @contador <= @limite
-            BEGIN
-                UPDATE Partidos SET idganador = dbo.ganadorPartido(@contador) WHERE id = @contador
-                SET @contador = @contador + 1
-            END
+        UPDATE Partidos SET idganador = dbo.ganadorPartido(id) WHERE 1 = 1
     END
 GO
 EXEC ganadorPartidos;
