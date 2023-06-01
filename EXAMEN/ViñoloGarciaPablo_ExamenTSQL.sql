@@ -71,7 +71,7 @@ as
         DECLARE @contador int = (select MIN(id) from Partidos)
         WHILE @contador <= @limite
             BEGIN
-                UPDATE Partidos SET idganador = dbo.ganadorPartido(@contador) WHERE id = @contador
+                UPDATE Partidos SET idganador = dbo.ganadorPartido(id) WHERE 1 = 1
                 SET @contador = @contador + 1
             END
     END
